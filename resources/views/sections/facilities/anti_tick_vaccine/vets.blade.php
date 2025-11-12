@@ -1,346 +1,313 @@
-@extends('layouts.app')
+@extends('layouts.infohub')
+
+@section('title', 'Vets | Anti-Tick Vaccine | NARO Infohub')
+
+@push('styles')
+<style>
+.infohub-tabs button {
+    background:transparent;
+    border:none;
+    font-size:0.95rem;
+    font-weight:700;
+    color:#0E5DAA;
+    padding:0.35rem 0;
+    margin-left:1.5rem;
+    border-bottom:3px solid transparent;
+    transition:color 0.2s ease,border-color 0.2s ease;
+}
+.infohub-tabs button:first-child {
+    margin-left:0;
+}
+.infohub-tabs button.active {
+    color:#0B497E;
+    border-color:#0B497E;
+}
+.infohub-quick-link {
+    display:block;
+    width:100%;
+    padding:0.85rem 1rem;
+    margin:0 0.5rem;
+    background:#0E5DAA;
+    border-bottom:4px solid #0B497E;
+    color:#fff;
+    font-weight:600;
+    text-align:left;
+    text-decoration:none;
+    transition:background 0.2s ease;
+}
+.infohub-quick-link:hover {
+    background:#0B497E;
+    color:#fff;
+    text-decoration:none;
+}
+.infohub-table thead th {
+    background:#0E5DAA;
+    color:#fff;
+    font-weight:600;
+}
+.infohub-table tbody tr:nth-child(even){
+    background:#f8fafc;
+}
+.infohub-table tbody tr:nth-child(odd){
+    background:#f1f5f9;
+}
+.infohub-table tbody tr:hover {
+    background:#e2e8f0;
+}
+.chart-container {
+    display:none;
+    height:420px;
+}
+.chart-container.active {
+    display:block;
+}
+.infohub-layout {
+    display:flex;
+    flex-direction:column;
+    gap:2rem;
+}
+.infohub-visual {
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+}
+@media (min-width:768px){
+    .infohub-layout {
+        flex-direction:row;
+        align-items:stretch;
+    }
+    .infohub-links {
+        flex:0 0 30%;
+        max-width:30%;
+    }
+    .infohub-visual {
+        flex:0 0 70%;
+        max-width:70%;
+    }
+}
+</style>
+@endpush
 
 @section('content')
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<style>
-    .page-breadcrumb {
-        padding: 1rem 0;
-        background-color: #f8f9fa;
-    }
-    .page-title-section {
-        padding: 2rem 0;
-        border-bottom: 3px solid #0d6efd;
-        margin-bottom: 2rem;
-    }
-    .content-section {
-        background: #ffffff;
-        border-radius: 8px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        border: 1px solid #e0e0e0;
-    }
-    .section-heading {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #212529;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid #0d6efd;
-    }
-    .info-list {
-        list-style: none;
-        padding-left: 0;
-    }
-    .info-list li {
-        padding: 0.5rem 0;
-        padding-left: 1.8rem;
-        position: relative;
-        line-height: 1.6;
-    }
-    .info-list li:before {
-        content: "•";
-        position: absolute;
-        left: 0.5rem;
-        color: #0d6efd;
-        font-size: 1.5rem;
-        line-height: 1.6;
-    }
-    .view-toggle {
-        display: inline-flex;
-        border: 1px solid #dee2e6;
-        border-radius: 4px;
-        overflow: hidden;
-    }
-    .view-toggle button {
-        padding: 0.5rem 1.25rem;
-        border: none;
-        background-color: white;
-        color: #495057;
-        cursor: pointer;
-        transition: all 0.2s;
-        font-size: 0.9rem;
-    }
-    .view-toggle button.active {
-        background-color: #0d6efd;
-        color: white;
-    }
-    .view-toggle button:hover:not(.active) {
-        background-color: #f8f9fa;
-    }
-    .export-btn {
-        padding: 0.5rem 1.25rem;
-        background-color: #198754;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-        font-size: 0.9rem;
-    }
-    .export-btn:hover {
-        background-color: #157347;
-    }
-    .table-container {
-        overflow-x: auto;
-    }
-    .chart-container {
-        display: none;
-        max-width: 100%;
-        height: 400px;
-    }
-    .chart-container.active {
-        display: block;
-    }
-</style>
-
-<div class="page-breadcrumb">
-    <div class="container">
-        <a href="{{ route('facilities.anti_tick_vaccine') }}" class="text-decoration-none text-primary">
-            <i class="bi bi-arrow-left"></i> Back to Anti-Tick Vaccine
+<section class="max-w-6xl mx-auto px-16 py-22 space-y-8">
+    <div class="flex items-center text-sm text-[#0E5DAA]">
+        <a href="{{ route('facilities.anti_tick_vaccine') }}" class="flex items-center font-semibold hover:text-[#0B497E]">
+            <span class="mr-2 text-lg">←</span>
+            Back to Anti-Tick Vaccine
         </a>
     </div>
-</div>
 
-<div class="container">
-    <div class="page-title-section">
-        <h1 class="display-5 mb-2">Vets - Anti-Tick Vaccine</h1>
-        <p class="text-muted mb-0">Information for Veterinarians</p>
-    </div>
-
-    <!-- Information Section -->
-    <div class="content-section">
-        <h2 class="section-heading">Information for Veterinarians</h2>
-        <p class="mb-4">
-            This section provides comprehensive information for veterinarians about the anti-tick vaccine.
-        </p>
-        
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <h3 class="h5 fw-bold mb-3">Key Information:</h3>
-                <ul class="info-list">
-                    <li>Dosage and administration guidelines</li>
-                    <li>Contraindications and precautions</li>
-                    <li>Clinical efficacy data</li>
-                    <li>Post-vaccination monitoring</li>
-                    <li>Adverse reaction management</li>
-                </ul>
+    <div class="bg-white border border-gray-200 shadow-sm rounded-xl p-18 space-y-6">
+        <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div>
+                <h1 class="text-3xl font-semibold text-[#0B497E]">Vets and animal health workers portal</h1>
+                <p class="text-gray-600">Tools, protocols, and data visualisations supporting professional deployment of the NARO anti-tick vaccine.</p>
             </div>
-            
-            <div class="col-md-6 mb-4">
-                <h3 class="h5 fw-bold mb-3">Professional Resources:</h3>
-                <p>
-                    Access training materials, clinical protocols, and continuing education resources for veterinary professionals.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Vaccination Data Section -->
-    <div class="content-section">
-        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-            <h2 class="section-heading mb-0">Vaccination Data</h2>
-            <div class="d-flex gap-2 flex-wrap">
-                <div class="view-toggle">
-                    <button id="tableViewBtn" class="active" onclick="switchView('table')">
-                        <i class="bi bi-table"></i> Table
-                    </button>
-                    <button id="chartViewBtn" onclick="switchView('chart')">
-                        <i class="bi bi-bar-chart"></i> Graph
-                    </button>
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+                <div class="infohub-tabs flex items-center">
+                    <button id="chartTab" class="active" type="button" onclick="switchView('chart')">Data visualisation</button>
+                    <button id="tableTab" type="button" onclick="switchView('table')">Table view</button>
                 </div>
-                <button class="export-btn" onclick="exportData()">
-                    <i class="bi bi-download"></i> Export CSV
-                </button>
+                <button type="button" class="inline-flex items-center justify-center px-5 py-2 font-semibold text-white bg-[#19b34a] hover:bg-[#158c3a] transition" onclick="exportData()">Export CSV</button>
             </div>
         </div>
 
-        <!-- Table View -->
-        <div id="tableView" class="table-container">
-            <table class="table table-striped table-hover" id="vaccinationTable">
-                <thead class="table-light">
-                    <tr>
-                        <th>Date</th>
-                        <th>Vet Name</th>
-                        <th>District</th>
-                        <th>Animals Vaccinated</th>
-                        <th>Cattle</th>
-                        <th>Goats</th>
-                        <th>Sheep</th>
-                        <th>Efficacy Rate (%)</th>
-                        <th>Adverse Reactions</th>
-                    </tr>
-                </thead>
-                <tbody id="dataTableBody">
-                    <!-- Data will be populated by JavaScript -->
-                </tbody>
-            </table>
-        </div>
+        <div class="infohub-layout">
+            <div class="infohub-links bg-[#f3f7ff] border border-[#c6d7f5] rounded-lg p-4 flex flex-col gap-4 shadow-sm h-full">
+                <a href="#" class="infohub-quick-link">Step-by-step</a>
+                <a href="#" class="infohub-quick-link">Vaccine use and handling</a>
+                <a href="#" class="infohub-quick-link">Vaccine user manual</a>
+                <a href="#" class="infohub-quick-link">Fact sheet</a>
+            </div>
 
-        <!-- Chart View -->
-        <div id="chartView" class="chart-container">
-            <canvas id="vaccinationChart"></canvas>
+            <div class="infohub-visual bg-[#eff6ff] border border-[#0E5DAA]/20 rounded-xl p-6 h-full flex flex-col">
+                <div id="chartView" class="chart-container active bg-white border border-gray-200 rounded-lg shadow-sm p-6 w-full">
+                    <canvas id="vaccinationChart"></canvas>
+                </div>
+                <div id="tableView" class="hidden bg-white border border-gray-200 rounded-lg shadow-sm p-4 overflow-x-auto w-full">
+                    <table class="infohub-table min-w-full text-left" id="vaccinationTable">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-3 text-sm uppercase tracking-wide">Date</th>
+                                <th class="px-4 py-3 text-sm uppercase tracking-wide">Vet Name</th>
+                                <th class="px-4 py-3 text-sm uppercase tracking-wide">District</th>
+                                <th class="px-4 py-3 text-sm uppercase tracking-wide">Animals Vaccinated</th>
+                                <th class="px-4 py-3 text-sm uppercase tracking-wide">Cattle</th>
+                                <th class="px-4 py-3 text-sm uppercase tracking-wide">Goats</th>
+                                <th class="px-4 py-3 text-sm uppercase tracking-wide">Sheep</th>
+                                <th class="px-4 py-3 text-sm uppercase tracking-wide">Efficacy Rate (%)</th>
+                                <th class="px-4 py-3 text-sm uppercase tracking-wide">Adverse Reactions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-gray-200 text-gray-700">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
+@endsection
 
-<div class="mb-5"></div>
-
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
 <script>
-    // Data will be fetched from MySQL via API
-    let vaccinationData = [];
+document.addEventListener('DOMContentLoaded', () => {
+    const chartScriptReady = () => typeof Chart !== 'undefined';
 
-    // Fetch data from API
-    async function fetchVaccinationData() {
-        try {
-            const response = await fetch('/api/vet-vaccinations');
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-            vaccinationData = await response.json();
-            populateTable();
-            initChart();
-        } catch (error) {
-            console.error('Error fetching vaccination data:', error);
-            alert('Failed to load vaccination data. Please try again later.');
+    const init = () => {
+        if (!chartScriptReady()) {
+            setTimeout(init, 100);
+            return;
         }
+        fetchVaccinationData();
+    };
+
+    init();
+});
+
+let vaccinationData = [];
+let vaccinationChart = null;
+
+async function fetchVaccinationData() {
+    try {
+        const response = await fetch('/api/vet-vaccinations');
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
+        vaccinationData = await response.json();
+        populateTable();
+        initChart();
+    } catch (error) {
+        console.error('Error fetching vaccination data:', error);
+        alert('Failed to load vaccination data. Please try again later.');
+    }
+}
+
+function populateTable() {
+    const tbody = document.getElementById('dataTableBody');
+    tbody.innerHTML = '';
+
+    vaccinationData.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-gray-100';
+        tr.innerHTML = `
+            <td class="px-4 py-3">${row.date}</td>
+            <td class="px-4 py-3">${row.vet}</td>
+            <td class="px-4 py-3">${row.district}</td>
+            <td class="px-4 py-3">${row.total}</td>
+            <td class="px-4 py-3">${row.cattle}</td>
+            <td class="px-4 py-3">${row.goats}</td>
+            <td class="px-4 py-3">${row.sheep}</td>
+            <td class="px-4 py-3">${row.efficacy}%</td>
+            <td class="px-4 py-3">${row.reactions}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function initChart() {
+    const ctx = document.getElementById('vaccinationChart');
+    if (!ctx) {
+        return;
     }
 
-    // Populate table
-    function populateTable() {
-        const tbody = document.getElementById('dataTableBody');
-        tbody.innerHTML = '';
-        
-        vaccinationData.forEach(row => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${row.date}</td>
-                <td>${row.vet}</td>
-                <td>${row.district}</td>
-                <td>${row.total}</td>
-                <td>${row.cattle}</td>
-                <td>${row.goats}</td>
-                <td>${row.sheep}</td>
-                <td>${row.efficacy}%</td>
-                <td>${row.reactions}</td>
-            `;
-            tbody.appendChild(tr);
-        });
+    if (vaccinationChart) {
+        vaccinationChart.destroy();
     }
 
-    // Initialize chart
-    let vaccinationChart = null;
-    function initChart() {
-        const ctx = document.getElementById('vaccinationChart').getContext('2d');
-        
-        vaccinationChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: vaccinationData.map(d => d.district),
-                datasets: [
-                    {
-                        label: 'Cattle',
-                        data: vaccinationData.map(d => d.cattle),
-                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Goats',
-                        data: vaccinationData.map(d => d.goats),
-                        backgroundColor: 'rgba(255, 206, 86, 0.7)',
-                        borderColor: 'rgba(255, 206, 86, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Sheep',
-                        data: vaccinationData.map(d => d.sheep),
-                        backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Number of Animals'
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'District'
-                        }
-                    }
+    vaccinationChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: vaccinationData.map(d => d.district),
+            datasets: [
+                {
+                    label: 'Cattle',
+                    data: vaccinationData.map(d => d.cattle),
+                    backgroundColor: 'rgba(14, 93, 170, 0.75)',
+                    borderRadius: 6
                 },
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
+                {
+                    label: 'Goats',
+                    data: vaccinationData.map(d => d.goats),
+                    backgroundColor: 'rgba(25, 179, 74, 0.75)',
+                    borderRadius: 6
+                },
+                {
+                    label: 'Sheep',
+                    data: vaccinationData.map(d => d.sheep),
+                    backgroundColor: 'rgba(251, 191, 36, 0.75)',
+                    borderRadius: 6
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Vaccinations by District and Animal Type'
+                        text: 'Number of Animals'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'District'
                     }
                 }
+            },
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+                title: {
+                    display: true,
+                    text: 'Vaccinations by District and Animal Type'
+                }
             }
-        });
-    }
-
-    // Switch between table and chart view
-    function switchView(view) {
-        const tableView = document.getElementById('tableView');
-        const chartView = document.getElementById('chartView');
-        const tableBtn = document.getElementById('tableViewBtn');
-        const chartBtn = document.getElementById('chartViewBtn');
-
-        if (view === 'table') {
-            tableView.style.display = 'block';
-            chartView.classList.remove('active');
-            tableBtn.classList.add('active');
-            chartBtn.classList.remove('active');
-        } else {
-            tableView.style.display = 'none';
-            chartView.classList.add('active');
-            tableBtn.classList.remove('active');
-            chartBtn.classList.add('active');
         }
-    }
-
-    // Export data to CSV
-    function exportData() {
-        let csv = 'Date,Vet Name,District,Total Animals,Cattle,Goats,Sheep,Efficacy Rate (%),Adverse Reactions\n';
-        
-        vaccinationData.forEach(row => {
-            csv += `${row.date},${row.vet},${row.district},${row.total},${row.cattle},${row.goats},${row.sheep},${row.efficacy},${row.reactions}\n`;
-        });
-
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `vaccination_data_${new Date().toISOString().split('T')[0]}.csv`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-    }
-
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        fetchVaccinationData();
     });
+}
+
+function switchView(view) {
+    const tableView = document.getElementById('tableView');
+    const chartView = document.getElementById('chartView');
+    const tableTab = document.getElementById('tableTab');
+    const chartTab = document.getElementById('chartTab');
+
+    if (view === 'table') {
+        tableView.classList.remove('hidden');
+        chartView.classList.remove('active');
+        tableTab.classList.add('active');
+        chartTab.classList.remove('active');
+    } else {
+        tableView.classList.add('hidden');
+        chartView.classList.add('active');
+        tableTab.classList.remove('active');
+        chartTab.classList.add('active');
+    }
+}
+
+function exportData() {
+    let csv = 'Date,Vet Name,District,Total Animals,Cattle,Goats,Sheep,Efficacy Rate (%),Adverse Reactions\n';
+
+    vaccinationData.forEach(row => {
+        csv += `${row.date},${row.vet},${row.district},${row.total},${row.cattle},${row.goats},${row.sheep},${row.efficacy},${row.reactions}\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = `vaccination_data_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    window.URL.revokeObjectURL(url);
+}
 </script>
-
-<!-- Bootstrap Icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-@endsection
+@endpush
