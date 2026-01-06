@@ -3,4 +3,5 @@
   'admin.topic-detail-manager' => 'App\\Http\\Livewire\\Admin\\TopicDetailManager',
   'admin.topic-manager' => 'App\\Http\\Livewire\\Admin\\TopicManager',
   'crops-index' => 'App\\Http\\Livewire\\CropsIndex',
+  'livestock-index' => 'App\\Http\\Livewire\\LivestockIndex',
 );

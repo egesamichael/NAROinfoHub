@@ -103,15 +103,15 @@
                     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('filament.core.auth.logout', ['class' => 'w-full px-4 py-2 text-gray-600 transition-colors duration-200 hover:bg-gray-200'])->html();
-} elseif ($_instance->childHasBeenRendered('gMG3Cm4')) {
-    $componentId = $_instance->getRenderedChildComponentId('gMG3Cm4');
-    $componentTag = $_instance->getRenderedChildComponentTagName('gMG3Cm4');
+} elseif ($_instance->childHasBeenRendered('Hyu8oNV')) {
+    $componentId = $_instance->getRenderedChildComponentId('Hyu8oNV');
+    $componentTag = $_instance->getRenderedChildComponentTagName('Hyu8oNV');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('gMG3Cm4');
+    $_instance->preserveRenderedChild('Hyu8oNV');
 } else {
     $response = \Livewire\Livewire::mount('filament.core.auth.logout', ['class' => 'w-full px-4 py-2 text-gray-600 transition-colors duration-200 hover:bg-gray-200']);
     $html = $response->html();
-    $_instance->logRenderedChild('gMG3Cm4', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('Hyu8oNV', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

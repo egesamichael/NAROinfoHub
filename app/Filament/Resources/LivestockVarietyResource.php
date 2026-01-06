@@ -2,29 +2,27 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TopicResource\Pages;
-use App\Filament\Resources\TopicResource\RelationManagers;
+use App\Filament\Resources\LivestockVarietyResource\Pages;
 use Filament\Forms\Components;
 use Filament\Resources\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Tables\Columns\Text;
 use Filament\Resources\Tables\Columns\Boolean;
-use Filament\Resources\Tables\Filter;
 use Filament\Resources\Tables\Table;
 
-class TopicResource extends Resource
+class LivestockVarietyResource extends Resource
 {
-    public static $model = \App\Models\Topic::class;
+    public static $model = \App\Models\LivestockVariety::class;
 
-    public static $navigationGroup = 'Crops';
+    public static $navigationGroup = 'Livestock';
 
-    public static $navigationLabel = 'Topics';
+    public static $navigationLabel = 'Livestock Varieties';
 
     public static $icon = 'heroicon-o-collection';
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Crops';
+        return 'Livestock';
     }
 
     public static function getNavigationBadge(): ?string
@@ -38,10 +36,13 @@ class TopicResource extends Resource
     {
         return $form
             ->schema([
+                Components\Select::make('livestock_category_id')
+                    ->options(\App\Models\LivestockCategory::orderBy('name')->pluck('name', 'id')->toArray())
+                    ->required(),
                 Components\TextInput::make('name')->required(),
-                Components\TextInput::make('topic_slug')->label('Slug')->required()->unique('topics', 'slug'),
-                Components\Textarea::make('description')->rows(4),
-                Components\fileUpload::make('image')->image(),
+                Components\TextInput::make('variety_slug')->required()->unique('livestock_varieties', 'slug'),
+                Components\Textarea::make('description')->rows(3),
+                Components\FileUpload::make('image')->image(),
                 Components\Toggle::make('status')->default(true),
             ]);
     }
@@ -51,11 +52,8 @@ class TopicResource extends Resource
         return $table
             ->columns([
                 Text::make('name')->searchable()->sortable(),
+                Text::make('category.name')->label('Category')->sortable(),
                 Boolean::make('status'),
-                Text::make('created_at')->dateTime()->sortable(),
-            ])
-            ->filters([
-                //
             ]);
     }
 
@@ -69,9 +67,9 @@ class TopicResource extends Resource
     public static function routes()
     {
         return [
-            Pages\ListTopics::routeTo('/', 'index'),
-            Pages\CreateTopic::routeTo('/create', 'create'),
-            Pages\EditTopic::routeTo('/{record}/edit', 'edit'),
+            Pages\ListLivestockVarieties::routeTo('/', 'index'),
+            Pages\CreateLivestockVariety::routeTo('/create', 'create'),
+            Pages\EditLivestockVariety::routeTo('/{record}/edit', 'edit'),
         ];
     }
 }

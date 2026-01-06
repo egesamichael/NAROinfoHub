@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Cattle",
+    "slug": "cattle",
+    "description": "Cattle categories...",
+    "varieties": [
+      {
+        "name": "Zebu",
+        "slug": "zebu",
+        "description": "Zebu cattle variety...",
+        "details": [
+          {
+            "title": "Feeding",
+            "content": "Feeding instructions",
+            "attributes": {"weight": 400}
+          }
+        ]
+      }
+    ]
+  }
+]

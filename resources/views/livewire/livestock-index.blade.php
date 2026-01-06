@@ -1,7 +1,7 @@
 <div class="max-w-6xl mx-auto px-4">
 
   <style>
-    /* Crop UI: colors and layout to match design */
+    /* Livestock UI: mirror crop styles */
     .crops-grid { display:block; gap:1rem; }
     .crops-left, .crops-mid, .crops-right { background:#fff; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.06); padding:1rem; }
     .crops-left h3, .crops-mid h3 { display:inline-block; padding:6px 12px; border-radius:20px; font-weight:700; }
@@ -31,13 +31,13 @@
 
   <div class="crops-grid">
     <div class="crops-left">
-      <h3 class="font-bold mb-2">Topic</h3>
+      <h3 class="font-bold mb-2">Category</h3>
       <div class="list">
         <ul>
-          @foreach($topics as $topic)
+          @foreach($categories as $category)
             <li class="mb-2">
-              <button wire:click="selectTopic({{ $topic->id }})" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 {{ $selectedTopicId == $topic->id ? 'selected' : '' }}">
-                <span class="arrow">&raquo;&raquo;</span> <span class="name">{{ $topic->name }}</span>
+              <button wire:click="selectCategory({{ $category->id }})" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 {{ $selectedCategoryId == $category->id ? 'selected' : '' }}">
+                <span class="arrow">&raquo;&raquo;</span> <span class="name">{{ $category->name }}</span>
               </button>
             </li>
           @endforeach
@@ -47,7 +47,7 @@
       <div class="small-box mt-4">
         <h4 class="font-semibold text-sm text-yellow-800">Varieties</h4>
         <ul class="text-sm text-gray-700 mt-2">
-          @foreach($topics->first()?->subTopics?->take(6) ?? [] as $v)
+          @foreach($categories->first()?->varieties?->take(6) ?? [] as $v)
             <li class="mb-1">&raquo; {{ $v->name }}</li>
           @endforeach
         </ul>
@@ -60,12 +60,12 @@
     </div>
 
     <div class="crops-mid">
-      <h3 class="font-bold mb-2">Sub-Topic</h3>
+      <h3 class="font-bold mb-2">Variety</h3>
       <div class="list">
         <ul>
-          @foreach($subTopics as $sub)
+          @foreach($varieties as $sub)
             <li class="mb-2">
-              <button wire:click="selectSubTopic({{ $sub->id }})" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 {{ $selectedSubTopicId == $sub->id ? 'selected-sub' : '' }}">
+              <button wire:click="selectVariety({{ $sub->id }})" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 {{ $selectedVarietyId == $sub->id ? 'selected-sub' : '' }}">
                 <span class="arrow">&raquo;&raquo;</span> <span class="name">{{ $sub->name }}</span>
               </button>
             </li>
@@ -75,16 +75,16 @@
     </div>
 
     <div class="crops-right">
-      <h3 class="font-bold mb-2">Technology Description</h3>
+      <h3 class="font-bold mb-2">Description</h3>
 
       <div>
         @if($detail)
           <div class="text-sm text-gray-700 mb-2">
-            <strong>{{ $detail->title ?? ($detail->subTopic->name ?? '') }}</strong>
+            <strong>{{ $detail->title ?? ($detail->variety->name ?? '') }}</strong>
           </div>
 
           <div class="prose max-w-none">
-            {!! $detail->content !!}
+            {!! nl2br(e($detail->content)) !!}
           </div>
 
           @if($detail->attributes)
@@ -98,14 +98,8 @@
             </div>
           @endif
 
-          @if(!empty($detail->post_harvest))
-            <div class="mt-4 post-harvest">
-              <h4 class="font-semibold">Post harvest handling</h4>
-              {!! $detail->post_harvest !!}
-            </div>
-          @endif
         @else
-          <div class="text-gray-500">Select a sub-topic to see details.</div>
+          <div class="text-gray-500">Select a variety to see details.</div>
         @endif
       </div>
     </div>

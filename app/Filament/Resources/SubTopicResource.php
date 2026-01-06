@@ -16,11 +16,23 @@ class SubTopicResource extends Resource
 {
     public static $model = \App\Models\SubTopic::class;
 
-    public static $navigationGroup = 'Content';
+    public static $navigationGroup = 'Crops';
 
     public static $navigationLabel = 'Sub Topics';
 
     public static $icon = 'heroicon-o-collection';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Crops';
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        $count = static::$model::count();
+
+        return $count > 0 ? (string) $count : null;
+    }
 
     public static function form(Form $form)
     {

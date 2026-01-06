@@ -43,7 +43,9 @@ class CropsIndex extends Component
 
     protected function loadDetail($subTopicId)
     {
-        $this->detail = \App\Models\TopicDetail::where('sub_topic_id', $subTopicId)->first();
+        $this->detail = \App\Models\TopicDetail::where('sub_topic_id', $subTopicId)
+            ->orderBy('updated_at', 'desc')
+            ->first();
     }
 
     public function render()

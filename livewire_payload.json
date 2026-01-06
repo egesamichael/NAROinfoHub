@@ -1,0 +1,19 @@
+﻿{
+  " fingerprint\:{
+ \id\:\4Pq0UARlqKO5lHHVPqjq\,
+ \name\:\filament.core.auth.login\,
+ \locale\:\en\,
+ \path\:\admin/login\,
+ \method\:\GET\,
+ \v\:\acj\
+ },
+ \serverMemo\:{
+ \data\:{
+ \email\:\admin@example.com\,
+ \password\:\ChangeMe123!\,
+ \remember\:false
+ },
+ \checksum\:\3e6d801778f9443a5b98dd7b65c6a166d08421fd61c6dff2a90314d870e5b3eb\
+ },
+ \updates\:[]
+}
