@@ -7,8 +7,8 @@ use App\Filament\Resources\TopicResource\RelationManagers;
 use Filament\Forms\Components;
 use Filament\Resources\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BooleanColumn;
+use Filament\Resources\Tables\Columns\Text;
+use Filament\Resources\Tables\Columns\Boolean;
 use Filament\Resources\Tables\Filter;
 use Filament\Resources\Tables\Table;
 
@@ -40,10 +40,10 @@ class TopicResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->searchable()->sortable(),
-                TextColumn::make('order')->sortable(),
-                BooleanColumn::make('status'),
-                TextColumn::make('created_at')->dateTime()->sortable(),
+                Text::make('name')->searchable()->sortable(),
+                Text::make('order')->sortable(),
+                Boolean::make('status'),
+                Text::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
                 //

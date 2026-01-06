@@ -7,8 +7,8 @@ use App\Filament\Resources\SubTopicResource\RelationManagers;
 use Filament\Forms\Components;
 use Filament\Resources\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\BooleanColumn;
+use Filament\Resources\Tables\Columns\Text;
+use Filament\Resources\Tables\Columns\Boolean;
 use Filament\Resources\Tables\Filter;
 use Filament\Resources\Tables\Table;
 
@@ -39,10 +39,10 @@ class SubTopicResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->searchable()->sortable(),
-                TextColumn::make('topic.name')->label('Topic')->sortable(),
-                TextColumn::make('order')->sortable(),
-                BooleanColumn::make('status'),
+                Text::make('name')->searchable()->sortable(),
+                Text::make('topic.name')->label('Topic')->sortable(),
+                Text::make('order')->sortable(),
+                Boolean::make('status'),
             ])
             ->filters([
                 //
