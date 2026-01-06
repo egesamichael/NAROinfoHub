@@ -85,8 +85,8 @@ class TopicDetailManager extends Component
     public function render()
     {
         $details = TopicDetail::with('subTopic.topic')->orderBy('created_at','desc')->paginate(10);
-        $topics = Topic::orderBy('order')->get();
-        $subtopics = SubTopic::orderBy('order')->get();
+        $topics = Topic::orderBy('name')->get();
+        $subtopics = SubTopic::orderBy('name')->get();
         return view('livewire.admin.topic-detail-manager', compact('details','topics','subtopics'));
     }
 }

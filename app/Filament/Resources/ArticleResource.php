@@ -22,7 +22,7 @@ class ArticleResource extends Resource
         return $form
             ->schema([
                 Components\TextInput::make('title')->required(),
-                Components\TextInput::make('slug')->required()->unique(ignoreRecord: true),
+                Components\TextInput::make('slug')->required()->unique('articles', 'slug'),
                 Components\RichEditor::make('content')->nullable(),
                 Components\Toggle::make('published')->default(false),
             ]);

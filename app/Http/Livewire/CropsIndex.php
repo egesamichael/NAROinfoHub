@@ -14,7 +14,7 @@ class CropsIndex extends Component
 
     public function mount()
     {
-        $this->topics = \App\Models\Topic::orderBy('order')->get();
+        $this->topics = \App\Models\Topic::orderBy('name')->get();
 
         if ($this->topics->isNotEmpty()) {
             $this->selectTopic($this->topics->first()->id);
@@ -24,7 +24,7 @@ class CropsIndex extends Component
     public function selectTopic($id)
     {
         $this->selectedTopicId = $id;
-        $this->subTopics = \App\Models\SubTopic::where('topic_id', $id)->orderBy('order')->get();
+        $this->subTopics = \App\Models\SubTopic::where('topic_id', $id)->orderBy('name')->get();
 
         $this->selectedSubTopicId = $this->subTopics->first()?->id;
 

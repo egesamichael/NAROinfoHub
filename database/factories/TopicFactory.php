@@ -19,7 +19,7 @@ class TopicFactory extends Factory
             'description' => $this->faker->sentence(),
             'image' => null,
             'meta' => [],
-            'order' => 0,
+
             'status' => true,
         ];
     }

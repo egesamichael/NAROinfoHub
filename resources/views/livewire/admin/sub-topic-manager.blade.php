@@ -58,11 +58,7 @@
             @error('name') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
           </div>
 
-          <div class="grid grid-cols-3 gap-3">
-            <div>
-              <label class="block text-sm">Order</label>
-              <input type="number" wire:model.defer="order" class="w-full border rounded px-3 py-2" />
-            </div>
+          <div class="grid grid-cols-1 gap-3">
             <div>
               <label class="block text-sm">Status</label>
               <select wire:model.defer="status" class="w-full border rounded px-3 py-2">

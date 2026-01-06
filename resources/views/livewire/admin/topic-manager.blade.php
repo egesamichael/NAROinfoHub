@@ -14,7 +14,6 @@
     <thead>
       <tr class="text-left">
         <th class="px-4 py-2">Name</th>
-        <th class="px-4 py-2">Order</th>
         <th class="px-4 py-2">Status</th>
         <th class="px-4 py-2">Actions</th>
       </tr>
@@ -23,7 +22,6 @@
       @foreach($topics as $t)
         <tr class="border-t">
           <td class="px-4 py-2">{{ $t->name }}</td>
-          <td class="px-4 py-2">{{ $t->order }}</td>
           <td class="px-4 py-2">{{ $t->status ? 'Active' : 'Inactive' }}</td>
           <td class="px-4 py-2">
             <button wire:click="edit({{ $t->id }})" class="px-2 py-1 bg-yellow-400 rounded mr-2">Edit</button>
@@ -57,11 +55,7 @@
             <label class="block text-sm">Description</label>
             <textarea wire:model.defer="description" class="w-full border rounded px-3 py-2" rows="3"></textarea>
           </div>
-          <div class="grid grid-cols-3 gap-3">
-            <div>
-              <label class="block text-sm">Order</label>
-              <input type="number" wire:model.defer="order" class="w-full border rounded px-3 py-2" />
-            </div>
+<div class="grid grid-cols-2 gap-3">
             <div>
               <label class="block text-sm">Status</label>
               <select wire:model.defer="status" class="w-full border rounded px-3 py-2">
@@ -102,7 +96,6 @@
                       <input type="text" wire:model.defer="subtopics.{{ $i }}.slug" placeholder="Slug" class="w-full border rounded px-3 py-2 mb-2" />
                       <textarea wire:model.defer="subtopics.{{ $i }}.description" placeholder="Description" class="w-full border rounded px-3 py-2 mb-2"></textarea>
                       <div class="grid grid-cols-3 gap-2">
-                        <input type="number" wire:model.defer="subtopics.{{ $i }}.order" class="border rounded px-3 py-2" placeholder="Order" />
                         <select wire:model.defer="subtopics.{{ $i }}.status" class="border rounded px-3 py-2">
                           <option value="1">Active</option>
                           <option value="0">Inactive</option>

@@ -15,7 +15,6 @@ class SubTopicManager extends Component
     public $name;
     public $slug;
     public $description;
-    public $order = 0;
     public $status = true;
     public $editingId = null;
     public $modalOpen = false;
@@ -25,7 +24,6 @@ class SubTopicManager extends Component
         'name' => 'required|string|max:255',
         'slug' => 'nullable|string|max:255',
         'description' => 'nullable|string',
-        'order' => 'nullable|integer',
         'status' => 'boolean',
     ];
 
@@ -43,7 +41,6 @@ class SubTopicManager extends Component
         $this->name = $s->name;
         $this->slug = $s->slug;
         $this->description = $s->description;
-        $this->order = $s->order;
         $this->status = $s->status;
         $this->modalOpen = true;
     }
@@ -59,7 +56,6 @@ class SubTopicManager extends Component
         $s->name = $this->name;
         $s->slug = $this->slug ?: \Str::slug($this->name);
         $s->description = $this->description;
-        $s->order = $this->order ?: 0;
         $s->status = $this->status;
         $s->save();
 
@@ -76,14 +72,14 @@ class SubTopicManager extends Component
 
     protected function resetForm()
     {
-        $this->reset(['topic_id','name','slug','description','order','status','editingId']);
+        $this->reset(['topic_id','name','slug','description','status','editingId']);
         $this->resetValidation();
     }
 
     public function render()
     {
-        $subs = SubTopic::with('topic')->orderBy('order')->paginate(10);
-        $topics = Topic::orderBy('order')->get();
+        $subs = SubTopic::with('topic')->orderBy('name')->paginate(10);
+        $topics = Topic::orderBy('name')->get();
         return view('livewire.admin.sub-topic-manager', compact('subs', 'topics'));
     }
 }

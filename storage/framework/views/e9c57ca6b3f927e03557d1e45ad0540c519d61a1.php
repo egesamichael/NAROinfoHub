@@ -34,22 +34,22 @@
       <h3 class="font-bold mb-2">Topic</h3>
       <div class="list">
         <ul>
-          @foreach($topics as $topic)
+          <?php $__currentLoopData = $topics; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $topic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <li class="mb-2">
-              <button wire:click="selectTopic({{ $topic->id }})" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 {{ $selectedTopicId == $topic->id ? 'selected' : '' }}">
-                <span class="arrow">&raquo;&raquo;</span> <span class="name">{{ $topic->name }}</span>
+              <button wire:click="selectTopic(<?php echo e($topic->id); ?>)" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 <?php echo e($selectedTopicId == $topic->id ? 'selected' : ''); ?>">
+                <span class="arrow">&raquo;&raquo;</span> <span class="name"><?php echo e($topic->name); ?></span>
               </button>
             </li>
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
       </div>
 
       <div class="small-box mt-4">
         <h4 class="font-semibold text-sm text-yellow-800">Varieties</h4>
         <ul class="text-sm text-gray-700 mt-2">
-          @foreach($topics->first()?->subTopics?->take(6) ?? [] as $v)
-            <li class="mb-1">&raquo; {{ $v->name }}</li>
-          @endforeach
+          <?php $__currentLoopData = $topics->first()?->subTopics?->take(6) ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <li class="mb-1">&raquo; <?php echo e($v->name); ?></li>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
       </div>
 
@@ -63,13 +63,13 @@
       <h3 class="font-bold mb-2">Sub-Topic</h3>
       <div class="list">
         <ul>
-          @foreach($subTopics as $sub)
+          <?php $__currentLoopData = $subTopics; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sub): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <li class="mb-2">
-              <button wire:click="selectSubTopic({{ $sub->id }})" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 {{ $selectedSubTopicId == $sub->id ? 'selected-sub' : '' }}">
-                <span class="arrow">&raquo;&raquo;</span> <span class="name">{{ $sub->name }}</span>
+              <button wire:click="selectSubTopic(<?php echo e($sub->id); ?>)" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 <?php echo e($selectedSubTopicId == $sub->id ? 'selected-sub' : ''); ?>">
+                <span class="arrow">&raquo;&raquo;</span> <span class="name"><?php echo e($sub->name); ?></span>
               </button>
             </li>
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
       </div>
     </div>
@@ -78,36 +78,39 @@
       <h3 class="font-bold mb-2">Technology Description</h3>
 
       <div>
-        @if($detail)
+        <?php if($detail): ?>
           <div class="text-sm text-gray-700 mb-2">
-            <strong>{{ $detail->title ?? ($detail->subTopic->name ?? '') }}</strong>
+            <strong><?php echo e($detail->title ?? ($detail->subTopic->name ?? '')); ?></strong>
           </div>
 
           <div class="prose max-w-none">
-            {!! nl2br(e($detail->content)) !!}
+            <?php echo nl2br(e($detail->content)); ?>
+
           </div>
 
-          @if($detail->attributes)
+          <?php if($detail->attributes): ?>
             <div class="mt-4 attributes-box">
               <h4 class="font-semibold">Attributes</h4>
               <ul class="text-sm">
-                @foreach($detail->attributes as $k => $v)
-                  <li><strong>{{ ucfirst($k) }}:</strong> {{ $v }}</li>
-                @endforeach
+                <?php $__currentLoopData = $detail->attributes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k => $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <li><strong><?php echo e(ucfirst($k)); ?>:</strong> <?php echo e($v); ?></li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </ul>
             </div>
-          @endif
+          <?php endif; ?>
 
-          @if(!empty($detail->post_harvest))
+          <?php if(!empty($detail->post_harvest)): ?>
             <div class="mt-4 post-harvest">
               <h4 class="font-semibold">Post harvest handling</h4>
-              {!! nl2br(e($detail->post_harvest)) !!}
+              <?php echo nl2br(e($detail->post_harvest)); ?>
+
             </div>
-          @endif
-        @else
+          <?php endif; ?>
+        <?php else: ?>
           <div class="text-gray-500">Select a sub-topic to see details.</div>
-        @endif
+        <?php endif; ?>
       </div>
     </div>
   </div>
 </div>
+<?php /**PATH C:\Users\Praise Web Solutions\NAROinfoHub\resources\views/livewire/crops-index.blade.php ENDPATH**/ ?>

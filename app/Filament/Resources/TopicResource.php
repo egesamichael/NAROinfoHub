@@ -26,12 +26,10 @@ class TopicResource extends Resource
     {
         return $form
             ->schema([
-                Components\TextInput::make('name')->required()->reactive(),
-                Components\TextInput::make('slug')->required()->unique(ignoreRecord: true),
+                Components\TextInput::make('name')->required(),
+                Components\TextInput::make('topic_slug')->label('Slug')->required()->unique('topics', 'slug'),
                 Components\Textarea::make('description')->rows(4),
-                Components\FileUpload::make('image')->image(),
-                Components\KeyValue::make('meta')->nullable(),
-                Components\TextInput::make('order')->numeric()->default(0),
+                Components\fileUpload::make('image')->image(),
                 Components\Toggle::make('status')->default(true),
             ]);
     }
@@ -41,7 +39,6 @@ class TopicResource extends Resource
         return $table
             ->columns([
                 Text::make('name')->searchable()->sortable(),
-                Text::make('order')->sortable(),
                 Boolean::make('status'),
                 Text::make('created_at')->dateTime()->sortable(),
             ])
