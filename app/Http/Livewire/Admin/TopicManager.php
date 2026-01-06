@@ -18,7 +18,6 @@ class TopicManager extends Component
     public $slug;
     public $description;
     public $image;
-    public $order = 0;
     public $status = true;
     public $editingId = null;
     public $modalOpen = false;
@@ -31,10 +30,8 @@ class TopicManager extends Component
         'slug' => 'nullable|string|max:255',
         'description' => 'nullable|string',
         'image' => 'nullable|image|max:1024',
-        'order' => 'nullable|integer',
         'status' => 'boolean',
         'subtopics.*.name' => 'required|string|max:255',
-        'subtopics.*.order' => 'nullable|integer',
         'subtopics.*.status' => 'boolean',
     ];
 
@@ -56,17 +53,15 @@ class TopicManager extends Component
         $this->name = $topic->name;
         $this->slug = $topic->slug;
         $this->description = $topic->description;
-        $this->order = $topic->order;
         $this->status = $topic->status;
 
         // load subtopics into an editable array
-        $this->subtopics = $topic->subTopics()->orderBy('order')->get()->map(function($s) {
+        $this->subtopics = $topic->subTopics()->orderBy('name')->get()->map(function($s) {
             return [
                 'id' => $s->id,
                 'name' => $s->name,
                 'slug' => $s->slug,
                 'description' => $s->description,
-                'order' => $s->order,
                 'status' => (bool)$s->status,
                 'deleted' => false,
             ];
@@ -90,7 +85,6 @@ class TopicManager extends Component
         $topic->name = $this->name;
         $topic->slug = $this->slug ?: Str::slug($this->name);
         $topic->description = $this->description;
-        $topic->order = $this->order ?: 0;
         $topic->status = $this->status;
 
         if ($this->image) {
@@ -117,7 +111,6 @@ class TopicManager extends Component
                         'name' => $row['name'],
                         'slug' => $row['slug'] ?: Str::slug($row['name']),
                         'description' => $row['description'] ?? null,
-                        'order' => $row['order'] ?? 0,
                         'status' => $row['status'] ?? true,
                     ]);
                 }
@@ -127,7 +120,6 @@ class TopicManager extends Component
                     'name' => $row['name'],
                     'slug' => $row['slug'] ?: Str::slug($row['name']),
                     'description' => $row['description'] ?? null,
-                    'order' => $row['order'] ?? 0,
                     'status' => $row['status'] ?? true,
                 ]);
             }
@@ -151,7 +143,6 @@ class TopicManager extends Component
             'name' => '',
             'slug' => '',
             'description' => null,
-            'order' => 0,
             'status' => true,
             'deleted' => false,
         ];
@@ -168,13 +159,13 @@ class TopicManager extends Component
 
     protected function resetForm()
     {
-        $this->reset(['name','slug','description','image','order','status','editingId','subtopics','imagePreview']);
+        $this->reset(['name','slug','description','image','status','editingId','subtopics','imagePreview']);
         $this->resetValidation();
     }
 
     public function render()
     {
-        $topics = Topic::orderBy('order')->paginate(10);
+        $topics = Topic::orderBy('name')->paginate(10);
         return view('livewire.admin.topic-manager', compact('topics'));
     }
 }

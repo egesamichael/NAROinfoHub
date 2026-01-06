@@ -26,8 +26,10 @@ class TopicDetailResource extends Resource
     {
         return $form
             ->schema([
-                Components\Select::make('sub_topic_id')->relationship('subTopic', 'name')->required(),
-                Components\TextInput::make('title')->required(),
+                Components\Select::make('sub_topic_id')
+                    ->options(\App\Models\SubTopic::orderBy('name')->pluck('name', 'id')->toArray())
+                    ->required(),
+                Components\TextInput::make('detail_title')->required(),
                 Components\RichEditor::make('content')->nullable(),
                 Components\KeyValue::make('attributes')->nullable(),
                 Components\FileUpload::make('image')->image(),

@@ -14,8 +14,6 @@ class Topic extends Model
         'slug',
         'description',
         'image',
-        'meta',
-        'order',
         'status',
     ];
 

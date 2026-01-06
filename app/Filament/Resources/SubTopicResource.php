@@ -26,11 +26,12 @@ class SubTopicResource extends Resource
     {
         return $form
             ->schema([
-                Components\Select::make('topic_id')->relationship('topic', 'name')->required(),
+                Components\Select::make('topic_id')
+                    ->options(\App\Models\Topic::orderBy('name')->pluck('name', 'id')->toArray())
+                    ->required(),
                 Components\TextInput::make('name')->required(),
-                Components\TextInput::make('slug')->required()->unique(ignoreRecord: true),
+                Components\TextInput::make('subtopic_slug')->required()->unique('sub_topics', 'slug'),
                 Components\Textarea::make('description')->rows(3),
-                Components\TextInput::make('order')->numeric()->default(0),
                 Components\Toggle::make('status')->default(true),
             ]);
     }
@@ -41,7 +42,6 @@ class SubTopicResource extends Resource
             ->columns([
                 Text::make('name')->searchable()->sortable(),
                 Text::make('topic.name')->label('Topic')->sortable(),
-                Text::make('order')->sortable(),
                 Boolean::make('status'),
             ])
             ->filters([

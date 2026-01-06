@@ -14,7 +14,6 @@ class SubTopic extends Model
         'name',
         'slug',
         'description',
-        'order',
         'status',
     ];
 

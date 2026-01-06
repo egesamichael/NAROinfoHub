@@ -18,7 +18,7 @@ class SubTopicFactory extends Factory
             'name' => $this->faker->word(),
             'slug' => $this->faker->slug(),
             'description' => $this->faker->sentence(),
-            'order' => 0,
+
             'status' => true,
         ];
     }
