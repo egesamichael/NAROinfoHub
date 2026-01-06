@@ -33,6 +33,11 @@
                 <div class="flex items-center space-x-4">
                     <input type="text" placeholder="search" class="px-6 py-2 rounded-full bg-gray-300 text-gray-700 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 w-40">
                 </div>
+                <div class="flex items-center">
+                    @auth
+                        <a href="{{ route('admin.topics') }}" class="px-4 py-2 bg-white/10 text-white rounded">Admin</a>
+                    @endauth
+                </div>
             </div>
         </div>
         <nav style="background:#19b34a;">

@@ -40,4 +40,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    // Custom admin pages (Livewire)
+    Route::prefix('admin')->middleware('auth')->group(function () {
+        Route::view('/topics', 'admin.topics')->name('admin.topics');
+        Route::view('/subtopics', 'admin.subtopics')->name('admin.subtopics');
+        Route::view('/details', 'admin.details')->name('admin.details');
+    });
 });

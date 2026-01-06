@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 define('LARAVEL_START', microtime(true));
 
 /*
+| Suppress deprecation notices from PHP 8.1/8.2 in local development
+| These come from vendor packages with implicitly nullable params.
+*/
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+
+/*
 |--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance
 |--------------------------------------------------------------------------

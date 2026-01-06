@@ -1,12 +1,9 @@
-@extends('layouts.menu')
+@extends('layouts.infohub')
 @section('title','crops')
 @section ('content')
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      
-      <p>Crops page content </p>
-    </div>
+<div class="container mx-auto px-4">
+  <div class="py-6">
+    <livewire:crops-index />
   </div>
 </div>
 @endsection
