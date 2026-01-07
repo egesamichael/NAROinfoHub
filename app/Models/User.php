@@ -58,4 +58,48 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Determine whether the user can access Filament admin.
+     * By default this allows the admin seeded via ADMIN_EMAIL in .env.
+     *
+     * @return bool
+     */
+    public function canAccessFilament(): bool
+    {
+        $adminEmail = env('ADMIN_EMAIL', 'admin@example.com');
+
+        // If you later add roles, replace this logic with role checks.
+        return $this->email === $adminEmail;
+    }
+
+    /**
+     * Return an avatar URL for Filament's avatar component.
+     * Uses the Jetstream profile photo when available, otherwise falls back to Gravatar.
+     *
+     * @return string
+     */
+    public function getFilamentAvatar(): string
+    {
+        if (! empty($this->profile_photo_path) || ! empty($this->profile_photo_url)) {
+            return $this->profile_photo_url;
+        }
+
+        $email = strtolower(trim($this->email ?? ''));
+        $hash = md5($email);
+
+        // Default to the 'mp' (mystery person) Gravatar fallback
+        return "https://www.gravatar.com/avatar/{$hash}?s=80&d=mp";
+    }
+
+    /**
+     * Backwards-compatible helper used by Filament to check admin status.
+     * Delegates to `canAccessFilament()` to keep logic in one place.
+     *
+     * @return bool
+     */
+    public function isFilamentAdmin(): bool
+    {
+        return $this->canAccessFilament();
+    }
 }

@@ -15,7 +15,24 @@ use Filament\Resources\Tables\Table;
 class ArticleResource extends Resource
 {
     public static $model = \App\Models\Article::class;
+
+    public static $navigationGroup = 'Crops';
+
+    public static $navigationLabel = 'Articles';
+
     public static $icon = 'heroicon-o-collection';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Crops';
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        $count = static::$model::count();
+
+        return $count > 0 ? (string) $count : null;
+    }
 
     public static function form(Form $form)
     {

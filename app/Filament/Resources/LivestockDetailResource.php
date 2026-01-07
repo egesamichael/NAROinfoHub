@@ -2,29 +2,27 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TopicDetailResource\Pages;
-use App\Filament\Resources\TopicDetailResource\RelationManagers;
+use App\Filament\Resources\LivestockDetailResource\Pages;
 use Filament\Forms\Components;
 use Filament\Resources\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Tables\Columns\Text;
 use Filament\Resources\Tables\Columns\Boolean;
-use Filament\Resources\Tables\Filter;
 use Filament\Resources\Tables\Table;
 
-class TopicDetailResource extends Resource
+class LivestockDetailResource extends Resource
 {
-    public static $model = \App\Models\TopicDetail::class;
+    public static $model = \App\Models\LivestockDetail::class;
 
-    public static $navigationGroup = 'Crops';
+    public static $navigationGroup = 'Livestock';
 
-    public static $navigationLabel = 'Details';
+    public static $navigationLabel = 'Livestock Details';
 
     public static $icon = 'heroicon-o-collection';
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Crops';
+        return 'Livestock';
     }
 
     public static function getNavigationBadge(): ?string
@@ -38,8 +36,8 @@ class TopicDetailResource extends Resource
     {
         return $form
             ->schema([
-                Components\Select::make('sub_topic_id')
-                    ->options(\App\Models\SubTopic::orderBy('name')->pluck('name', 'id')->toArray())
+                Components\Select::make('livestock_variety_id')
+                    ->options(\App\Models\LivestockVariety::orderBy('name')->pluck('name', 'id')->toArray())
                     ->required(),
                 Components\TextInput::make('detail_title')->required(),
                 Components\RichEditor::make('content')->nullable(),
@@ -53,11 +51,8 @@ class TopicDetailResource extends Resource
         return $table
             ->columns([
                 Text::make('title')->searchable()->sortable(),
-                Text::make('subTopic.name')->label('Sub-Topic')->sortable(),
+                Text::make('variety.name')->label('Variety')->sortable(),
                 Text::make('created_at')->dateTime()->sortable(),
-            ])
-            ->filters([
-                //
             ]);
     }
 
@@ -71,9 +66,9 @@ class TopicDetailResource extends Resource
     public static function routes()
     {
         return [
-            Pages\ListTopicDetails::routeTo('/', 'index'),
-            Pages\CreateTopicDetail::routeTo('/create', 'create'),
-            Pages\EditTopicDetail::routeTo('/{record}/edit', 'edit'),
+            Pages\ListLivestockDetails::routeTo('/', 'index'),
+            Pages\CreateLivestockDetail::routeTo('/create', 'create'),
+            Pages\EditLivestockDetail::routeTo('/{record}/edit', 'edit'),
         ];
     }
 }

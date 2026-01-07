@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Maize",
+    "slug": "maize",
+    "description": "Maize is a staple crop...",
+    "subtopics": [
+      {
+        "name": "Hybrid Maize",
+        "slug": "hybrid-maize",
+        "description": "Hybrid varieties...",
+        "details": [
+          {
+            "title": "Planting",
+            "content": "Planting instructions...",
+            "attributes": {"maturity": 95}
+          }
+        ]
+      }
+    ]
+  }
+]

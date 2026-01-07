@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\TopicDetailResource\Pages;
+namespace App\Filament\Resources\LivestockDetailResource\Pages;
 
-use App\Filament\Resources\TopicDetailResource;
+use App\Filament\Resources\LivestockDetailResource;
 use Filament\Resources\Pages\EditRecord;
-use Illuminate\Support\Facades\Log;
 
-class EditTopicDetail extends EditRecord
+class EditLivestockDetail extends EditRecord
 {
-    public static $resource = TopicDetailResource::class;
+    public static $resource = LivestockDetailResource::class;
 
-    public $sub_topic_id = null;
+    public $livestock_variety_id = null;
     public $detail_title = null;
     public $content = null;
     public $attributes = null;
@@ -19,7 +18,7 @@ class EditTopicDetail extends EditRecord
     public function mount($record): void
     {
         parent::mount($record);
-        $this->sub_topic_id = $this->record->sub_topic_id;
+        $this->livestock_variety_id = $this->record->livestock_variety_id;
         $this->detail_title = $this->record->title;
         $this->content = $this->record->content;
         $this->attributes = $this->record->attributes;
@@ -28,15 +27,8 @@ class EditTopicDetail extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        Log::info('EditTopicDetail::mutateFormDataBeforeSave called', [
-            'record_id' => $this->record->id ?? null,
-            'incoming_data' => $data,
-            'detail_title' => $this->detail_title,
-            'content' => substr($this->content ?? '', 0, 200),
-        ]);
-
         return [
-            'sub_topic_id' => $this->sub_topic_id,
+            'livestock_variety_id' => $this->livestock_variety_id,
             'title' => $this->detail_title,
             'content' => $this->content,
             'attributes' => $this->attributes,

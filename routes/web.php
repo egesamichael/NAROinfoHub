@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 //Dxsn code below
 Route::view('/', 'welcome2')->name('home'); // <-- adds the missing 'home' route
 
+// Ensure Filament admin login accepts POST so Livewire subrequests don't hit MethodNotAllowed
+Route::any('/admin/login', \Filament\Http\Livewire\Auth\Login::class);
+
 Route::view('/livestock', 'sections.livestock')->name('livestock.index');
 Route::view('/crops', 'sections.crops')->name('crops.index');
 Route::view('/forestry', 'sections.forestry')->name('forestry.index');
@@ -46,5 +49,11 @@ Route::middleware([
         Route::view('/topics', 'admin.topics')->name('admin.topics');
         Route::view('/subtopics', 'admin.subtopics')->name('admin.subtopics');
         Route::view('/details', 'admin.details')->name('admin.details');
+
+    if (app()->environment('local')) {
+        Route::get('/debug/topic-detail/{id}', function ($id) {
+            return response()->json(\App\Models\TopicDetail::findOrFail($id));
+        });
+    }
     });
 });
