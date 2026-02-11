@@ -67,6 +67,11 @@ class User extends Authenticatable
      */
     public function canAccessFilament(): bool
     {
+        // Allow access when running in local/dev environment for convenience.
+        if (env('APP_ENV', 'production') === 'local') {
+            return true;
+        }
+
         $adminEmail = env('ADMIN_EMAIL', 'admin@example.com');
 
         // If you later add roles, replace this logic with role checks.

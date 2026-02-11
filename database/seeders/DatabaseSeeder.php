@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             \Database\Seeders\AdminSeeder::class,
             \Database\Seeders\TopicSeeder::class,
             \Database\Seeders\LivestockSeeder::class,
+            \Database\Seeders\CommoditySeeder::class,
         ]);
     }
 }

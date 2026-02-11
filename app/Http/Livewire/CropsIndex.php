@@ -31,11 +31,11 @@ class CropsIndex extends Component
     {
         // load Topics and Crops using Collections for internal checks,
         // but expose them as arrays on the public properties (Livewire requires simple types).
-        $topicsCollection = \App\Models\Topic::orderBy('name')->get();
+        $topicsCollection = collect(\App\Models\Topic::orderBy('name')->get());
         $this->topics = $topicsCollection->toArray();
 
         // load crops from their own table (keep a collection for checks)
-        $cropsCollection = Crop::orderBy('name')->get();
+        $cropsCollection = collect(Crop::orderBy('name')->get());
         $this->crops = $cropsCollection->toArray();
 
         // Simple in-memory list of statistics. Replace with DB query if you have a Statistics model/table.
@@ -68,9 +68,10 @@ class CropsIndex extends Component
         if ($fromUser) {
             $this->showStats = false;
         }
-        $this->subTopics = \App\Models\SubTopic::where('topic_id', $id)->orderBy('name')->get();
+        $subTopicsCollection = \App\Models\SubTopic::where('topic_id', $id)->orderBy('name')->get();
+        $this->subTopics = $subTopicsCollection->toArray();
 
-        $this->selectedSubTopicId = $this->subTopics->first()?->id;
+        $this->selectedSubTopicId = $this->subTopics[0]['id'] ?? null;
 
         if ($this->selectedSubTopicId) {
             $this->loadDetail($this->selectedSubTopicId);
@@ -87,7 +88,7 @@ class CropsIndex extends Component
         $this->showStats = false;
 
         // for now we don't have relations between crops and subTopics. Keep categories empty.
-        $this->subTopics = collect();
+        $this->subTopics = [];
         $this->detail = null;
 
         // load categories for this crop (as arrays)

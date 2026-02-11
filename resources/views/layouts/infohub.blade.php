@@ -7,7 +7,6 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <script src="{{ mix('js/app.js') }}" defer></script>
 
     <style>
     [x-cloak]{ display:none !important; }
@@ -113,6 +112,7 @@
     </footer>
 </div>
 
+    <script src="{{ mix('js/app.js') }}"></script>
 @livewireScripts
 @stack('scripts')
 </body>

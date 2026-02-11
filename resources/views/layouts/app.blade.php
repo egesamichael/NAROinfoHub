@@ -7,7 +7,6 @@
 
   <!-- Tailwind (compiled via Mix) -->
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-  <script src="{{ mix('js/app.js') }}" defer></script>
 
   <!-- Helpers -->
   <style>[x-cloak]{ display:none !important; }</style>
@@ -21,6 +20,7 @@
     @yield('content')
   </main>
 
+  <script src="{{ mix('js/app.js') }}"></script>
   @livewireScripts
 </body>
 </html>

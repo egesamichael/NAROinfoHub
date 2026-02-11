@@ -49,6 +49,9 @@ Route::middleware([
         Route::view('/topics', 'admin.topics')->name('admin.topics');
         Route::view('/subtopics', 'admin.subtopics')->name('admin.subtopics');
         Route::view('/details', 'admin.details')->name('admin.details');
+        Route::view('/crops', 'admin.crops')->name('admin.crops');
+        Route::view('/categories', 'admin.categories')->name('admin.categories');
+        Route::view('/items', 'admin.items')->name('admin.items');
 
     if (app()->environment('local')) {
         Route::get('/debug/topic-detail/{id}', function ($id) {
