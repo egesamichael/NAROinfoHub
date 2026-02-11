@@ -5,15 +5,15 @@
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('crops-index', [])->html();
-} elseif ($_instance->childHasBeenRendered('gnqGJlI')) {
-    $componentId = $_instance->getRenderedChildComponentId('gnqGJlI');
-    $componentTag = $_instance->getRenderedChildComponentTagName('gnqGJlI');
+} elseif ($_instance->childHasBeenRendered('Bs4NjUf')) {
+    $componentId = $_instance->getRenderedChildComponentId('Bs4NjUf');
+    $componentTag = $_instance->getRenderedChildComponentTagName('Bs4NjUf');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('gnqGJlI');
+    $_instance->preserveRenderedChild('Bs4NjUf');
 } else {
     $response = \Livewire\Livewire::mount('crops-index', []);
     $html = $response->html();
-    $_instance->logRenderedChild('gnqGJlI', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('Bs4NjUf', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

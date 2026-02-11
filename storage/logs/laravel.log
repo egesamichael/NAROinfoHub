@@ -3523,3 +3523,12 @@ Only protected or private properties can be set as other types because JavaScrip
 #70 /var/www/projects/NAROinfoHub/server.php(21): require_once('...')
 #71 {main}
 "} 
+[2026-02-11 21:58:19] local.ERROR: Command "build" is not defined. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"build\" is not defined. at /var/www/projects/NAROinfoHub/vendor/symfony/console/Application.php:720)
+[stacktrace]
+#0 /var/www/projects/NAROinfoHub/vendor/symfony/console/Application.php(259): Symfony\\Component\\Console\\Application->find()
+#1 /var/www/projects/NAROinfoHub/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun()
+#2 /var/www/projects/NAROinfoHub/vendor/laravel/framework/src/Illuminate/Console/Application.php(94): Symfony\\Component\\Console\\Application->run()
+#3 /var/www/projects/NAROinfoHub/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
+#4 /var/www/projects/NAROinfoHub/artisan(41): Illuminate\\Foundation\\Console\\Kernel->handle()
+#5 {main}
+"} 
