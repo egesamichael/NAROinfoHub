@@ -25,10 +25,10 @@
 <div class="min-h-screen">
     <header class="shadow-sm" x-data="{ mobileOpen:false }">
         <div class="bg-white">
-            <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
                 <div class="flex items-center space-x-4">
-                    <img src="{{ asset('images/naro_logo.png') }}" alt="NARO Logo" class="w-16 h-16 object-contain">
-                    <span class="text-2xl font-semibold text-gray-800">NARO <span class="text-green-600">infoHUB</span></span>
+                    <img src="{{ asset('images/logo.png') }}" alt="NARO Logo" class="w-216 h-16 object-contain">
+                    <!-- <span class="text-2xl font-semibold text-gray-800">NARO <span class="text-green-600">infoHUB</span></span> -->
                 </div>
                 <div class="flex items-center space-x-4">
                     <input type="text" placeholder="search" class="px-6 py-2 rounded-full bg-gray-300 text-gray-700 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500 w-40">
@@ -41,7 +41,7 @@
             </div>
         </div>
         <nav style="background:#19b34a;">
-            <div class="max-w-6xl mx-auto w-full px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap">
+            <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap">
                 <button id="mobile-nav-toggle" @click="mobileOpen = !mobileOpen" class="p-2 rounded focus:outline-none focus:ring-2 focus:ring-white" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -105,7 +105,7 @@
 
     <footer class="mt-12">
         <div class="bg-[#fff4c5] border-t border-[#e6d48a]">
-            <div class="max-w-6xl mx-auto px-6 py-4 flex items-center space-x-3">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center space-x-3">
                 <span class="flex items-center justify-center w-8 h-8 rounded-full border border-[#bfa858] text-[#bfa858] text-lg">i</span>
                 <span class="text-gray-700 text-sm">National Agricultural Research Organisation {{ date('Y') }}</span>
             </div>

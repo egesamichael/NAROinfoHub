@@ -31,18 +31,18 @@
     }
   </style>
 
-  <div class="crops-grid {{ $showStats ? 'mode-stats' : 'mode-browse' }}">
+  <div class="crops-grid <?php echo e($showStats ? 'mode-stats' : 'mode-browse'); ?>">
     <div class="crops-left">
       <h3 class="font-bold mb-2">Commodity</h3>
       <div class="list">
         <ul>
-          @foreach($crops as $crop)
+          <?php $__currentLoopData = $crops; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $crop): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <li class="mb-2">
-              <button wire:click="selectCrop({{ $crop['id'] }})" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 {{ $selectedCropId == $crop['id'] ? 'selected' : '' }}">
-                <span class="arrow">&raquo;&raquo;</span> <span class="name">{{ $crop['name'] }}</span>
+              <button wire:click="selectCrop(<?php echo e($crop['id']); ?>)" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 <?php echo e($selectedCropId == $crop['id'] ? 'selected' : ''); ?>">
+                <span class="arrow">&raquo;&raquo;</span> <span class="name"><?php echo e($crop['name']); ?></span>
               </button>
             </li>
-          @endforeach
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </ul>
       </div>
 
@@ -50,19 +50,19 @@
 
     </div>
 
-    {{-- Statistics mode: show statistics list and description --}}
-    @if($showStats)
+    
+    <?php if($showStats): ?>
       <div class="crops-mid">
         <h3 class="font-bold mb-2">Statistics</h3>
         <div class="list">
           <ul>
-            @foreach($statistics as $s)
+            <?php $__currentLoopData = $statistics; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <li class="mb-2">
-                <button wire:click="selectStatistic({{ $s['id'] }})" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 {{ $selectedStatisticId == $s['id'] ? 'selected-sub' : '' }}">
-                  <span class="arrow">&raquo;&raquo;</span> <span class="name">{{ $s['title'] }}</span>
+                <button wire:click="selectStatistic(<?php echo e($s['id']); ?>)" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 <?php echo e($selectedStatisticId == $s['id'] ? 'selected-sub' : ''); ?>">
+                  <span class="arrow">&raquo;&raquo;</span> <span class="name"><?php echo e($s['title']); ?></span>
                 </button>
               </li>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           </ul>
         </div>
       </div>
@@ -70,16 +70,16 @@
       <div class="crops-right">
         <h3 class="font-bold mb-2">Statistics Description</h3>
         <div>
-          @if($statDetail)
-            <div class="text-sm text-gray-700 mb-2"><strong>{{ $statDetail['title'] }}</strong></div>
-            <div class="prose max-w-none">{!! nl2br(e($statDetail['content'])) !!}</div>
-          @else
+          <?php if($statDetail): ?>
+            <div class="text-sm text-gray-700 mb-2"><strong><?php echo e($statDetail['title']); ?></strong></div>
+            <div class="prose max-w-none"><?php echo nl2br(e($statDetail['content'])); ?></div>
+          <?php else: ?>
             <div class="text-gray-500">Select a statistic to see details.</div>
-          @endif
+          <?php endif; ?>
         </div>
       </div>
-    @else
-      {{-- Browse mode: show categories, varieties and details --}}
+    <?php else: ?>
+      
       <div class="crops-mid">
         <div class="flex items-center justify-between">
           <h3 class="font-bold mb-2">Category</h3>
@@ -87,69 +87,72 @@
         </div>
           <div class="list">
             <ul>
-              @foreach($categories as $cat)
+              <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <li class="mb-2">
-                  <button wire:click="selectCategory({{ $cat['id'] }})" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 {{ $selectedCategoryId == $cat['id'] ? 'selected-sub' : '' }}">
-                    <span class="arrow">&raquo;&raquo;</span> <span class="name">{{ $cat['name'] }}</span>
+                  <button wire:click="selectCategory(<?php echo e($cat['id']); ?>)" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 <?php echo e($selectedCategoryId == $cat['id'] ? 'selected-sub' : ''); ?>">
+                    <span class="arrow">&raquo;&raquo;</span> <span class="name"><?php echo e($cat['name']); ?></span>
                   </button>
                 </li>
-              @endforeach
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
           </div>
       </div>
 
-      @if($showVarietyColumn)
+      <?php if($showVarietyColumn): ?>
         <div class="crops-mid" style="min-width:220px">
           <h3 class="font-bold mb-2">Variety</h3>
           <div class="list">
             <ul>
-              @foreach($varieties as $v)
+              <?php $__currentLoopData = $varieties; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <li class="mb-2">
-                  <button wire:click="selectItem({{ $v['id'] }})" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 {{ $selectedItemId == $v['id'] ? 'selected-sub' : '' }}">
-                    <span class="name">{{ $v['title'] ?? ($v['name'] ?? 'Detail') }}</span>
+                  <button wire:click="selectItem(<?php echo e($v['id']); ?>)" class="text-left w-full px-2 py-1 rounded hover:bg-gray-100 <?php echo e($selectedItemId == $v['id'] ? 'selected-sub' : ''); ?>">
+                    <span class="name"><?php echo e($v['title'] ?? ($v['name'] ?? 'Detail')); ?></span>
                   </button>
                 </li>
-              @endforeach
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
           </div>
         </div>
-      @endif
+      <?php endif; ?>
 
       <div class="crops-right">
         <h3 class="font-bold mb-2">Technology Description</h3>
 
         <div>
-          @if($detail)
+          <?php if($detail): ?>
             <div class="text-sm text-gray-700 mb-2">
-              <strong>{{ data_get($detail,'title') ?? data_get($detail,'sub_topic.name') }}</strong>
+              <strong><?php echo e(data_get($detail,'title') ?? data_get($detail,'sub_topic.name')); ?></strong>
             </div>
 
             <div class="prose max-w-none">
-              {!! data_get($detail,'content') !!}
+              <?php echo data_get($detail,'content'); ?>
+
             </div>
 
-            @if(is_iterable(data_get($detail,'attributes',[])))
+            <?php if(is_iterable(data_get($detail,'attributes',[]))): ?>
               <div class="mt-4 attributes-box">
                 <h4 class="font-semibold">Attributes</h4>
                 <ul class="text-sm">
-                  @foreach(data_get($detail,'attributes',[]) as $k => $v)
-                    <li><strong>{{ ucfirst($k) }}:</strong> {{ $v }}</li>
-                  @endforeach
+                  <?php $__currentLoopData = data_get($detail,'attributes',[]); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k => $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li><strong><?php echo e(ucfirst($k)); ?>:</strong> <?php echo e($v); ?></li>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
               </div>
-            @endif
+            <?php endif; ?>
 
-            @if(!empty(data_get($detail,'post_harvest')))
+            <?php if(!empty(data_get($detail,'post_harvest'))): ?>
               <div class="mt-4 post-harvest">
                 <h4 class="font-semibold">Post harvest handling</h4>
-                {!! data_get($detail,'post_harvest') !!}
+                <?php echo data_get($detail,'post_harvest'); ?>
+
               </div>
-            @endif
-          @else
+            <?php endif; ?>
+          <?php else: ?>
             <div class="text-gray-500">Select a sub-topic to see details.</div>
-          @endif
+          <?php endif; ?>
         </div>
       </div>
-    @endif
+    <?php endif; ?>
   </div>
 </div>
+<?php /**PATH /var/www/projects/NAROinfoHub/resources/views/livewire/crops-index.blade.php ENDPATH**/ ?>
